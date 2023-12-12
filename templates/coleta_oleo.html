@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coleta de Óleo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/base.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .botao-sobre {
+            display: left;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2em;
+        }
+
+        .info-box,
+        .curiosidade-box,
+        .chart-box {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em;
+            width: 550px;
+            text-align: center;
+        }
+
+        .info-box img,
+        .info-box2 img {
+            object-fit: cover;
+            width: 60%;
+            height: 60%;
+            border-radius: 8px;
+        }
+
+        canvas {
+            color: white;
+        }
+
+        .info-box {
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart1 {
+            max-width: 200px;
+            max-height: 200px;
+            width: 60%;
+            height: 60%;
+        }
+    </style>
+</head>
+<body>
+    <header class="titulo-coleta-oleo">
+        <h1>COLETA DE ÓLEO</h1>
+        <a href="tipos-de-coleta.html" class="botao-sobre">Tipos de Coleta</a>
+    </header>
+
+    <div class="container">
+
+        <div class="chart-box">
+            <div class="info-box2">
+                <h2>ÍNDICES DA COLETA 1</h2>
+                <canvas id="chart3"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h2> ÍNDICES DA COLETA 2</h2>
+            <canvas id="chart2"></canvas>
+        </div>
+
+
+
+        <div class="chart-box">
+            <h2>TIPOS DE ÓLEO</h2>
+            <canvas id="chart1"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Óleo Vegetal', 'Óleo Mineral', 'Óleo Sintético', 'Óleo de Cozinha Usado', 'Óleo Diesel'],
+                datasets: [{
+                    data: [20, 20, 20, 20, 20],
+                    backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                datasets: [{
+                    label: 'Volume de Óleo Coletado',
+                    backgroundColor: '#133C63',
+                    borderColor: '##133C63',
+                    data: [25, 35, 10, 50, 60]
+                }]
+            }
+        });
+
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                datasets: [{
+                    label: 'Eficiência de Coleta ao Longo do Tempo',
+                    backgroundColor: '#133C63',
+                    borderColor: '#36A2EB',
+                    data: [8, 12, 10, 15, 5],
+                    fill: false
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
