@@ -9,7 +9,6 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            height: 200vh;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
@@ -21,18 +20,20 @@
             color: white;
             padding: 1em;
             text-align: center;
-            display: flex;
+            display: center;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
         }
 
         .botao-sobre {
-            display: inline-block;
+            display: left;
             padding: 10px 20px;
             background-color: #3498db;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+
+
         }
 
         .container {
@@ -45,14 +46,14 @@
         .info-box,
         .curiosidade-box,
         .chart-box {
-            width: 600px;
-            background-color: #3498db; 
-            color: white;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
             padding: 1em;
             margin: 1em;
-            border-radius: 8px;
+            width: 550px;
             text-align: center;
-            height: 400px; 
+
         }
 
         .info-box img,
@@ -61,40 +62,125 @@
             width: 60%;
             height: 60%;
             border-radius: 8px;
+
         }
+
+
+        canvas{
+            color: white;
+        }
+    
+        .info-box{
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart1{
+            max-width: 200px;
+            max-height: 200px;
+            width: 60%;
+            height: 60%;
+
+        }
+
     </style>
 </head>
 <body>
     <header class="titulo-aeradores">
-        <a href="sobre-aeradores.html" class="botao-sobre">Mais sobre Aeradores</a>
+
+        <a href="sobre-aeradores.html" class="botao-sobre">Sobre Aeradores</a>
+        <a href="dashboard.html">Ir para Dashboard</a>
         <h1>AERADORES</h1>
     </header>
 
-    <div class="options-box"></div>
     <div class="container">
-        <div class="info-box">
-            <h2>GRÁFICO1</h2>
 
-        </div>
 
-        <div class="curiosidade-box">
-            <h2>GRÁFICO2</h2>
+        <div class="chart-box">
+            <h2> CRESCIMENTO DO USO DE AERADORES</h2>
+            <canvas id="chart2"></canvas>
         </div>
 
         <div class="chart-box">
             <div class="info-box2">
-                <h2>GRÁFICO3</h2>
-
+                <h2>OXIGENAÇÃO DA ÁGUA</h2>
+                <canvas id="chart3"></canvas>
 
             </div>
         </div>
 
         <div class="chart-box">
-            <h2>GRÁFICO4</h2>
-
+            <h2>GRÁFICO USO DE AERADORES</h2>
+            <canvas id="chart1"></canvas>
         </div>
 
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function loadData() {
+            fetch('dados.json')
+                .then(response => response.json())
+                .then(data => {
+                    updateChartData(chart1, data.data1);
+                    updateChartData(chart2, data.data2);
+                    updateChartData(chart3, data.data3);
+                });
+        }
+
+        function generateRandomData(length) {
+            return Array.from({ length }, () => Math.floor(Math.random() * 100));
+        }
+
+        function updateChartData(chart, data) {
+            chart.data.datasets[0].data = data;
+            chart.update();
+        }
+
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Injetores tipo Venturi', 'Aerador de Superfície', 'Aerador de Pás', 'Aerador com Difusões','Aerador Cachoeira'],
+                datasets: [{
+                    data: generateRandomData(5),
+                    backgroundColor: ['#1680D9', '#2716D9', '#1642D9', '#16BED9', '#5B01DB']
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                datasets: [{
+                    label: 'Uso de aeradores',
+                    backgroundColor: '#133C63',
+                    borderColor: '##133C63',
+                    data: generateRandomData(5)
+                }]
+            }
+        });
+
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                datasets: [{
+                    label: 'Presença de oxigênio na água',
+                    backgroundColor: '#133C63',
+                    borderColor: '#36A2EB',
+                    data: generateRandomData(5),
+                    fill: false
+                }]
+            }
+        });
+
+        window.onload = function () {
+            loadData();
+        };
+    </script>
 </body>
-</html>
+</html

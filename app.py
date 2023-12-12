@@ -1,7 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash, abort
+from flask import Flask, render_template, request, redirect, url_for, session, flash, abort, jsonify
 from flaskext.mysql import MySQL
 #from flask_mysqldb import MySQL
 from functools import wraps
+import random
+from pymysql import MySQLError
+from werkzeug.local import LocalStack as _ctx_stack
 
 app = Flask(__name__)
 app.secret_key = '1'
@@ -42,6 +45,9 @@ def criar_tabela():
             db.commit()
     except Exception as e:
         flash(f"Erro ao criar tabela: {str(e)}", 'erro')
+
+def generate_random_data(length):
+    return [random.randint(0, 100) for _ in range(length)]
 
 @app.route('/')
 def index():
@@ -170,7 +176,47 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+@app.route('/filtragem')
+def filtragem():
+    try:
+        dados_grafico = {
+            'data1': generate_random_data(5),
+            'data2': generate_random_data(5),
+            'data3': generate_random_data(5),
+        }
+        return render_template('filtragem.html', dados_grafico=dados_grafico)
+    except Exception as e:
+        flash(f"Erro ao obter dados para filtragem: {str(e)}", 'erro')
+        return render_template('filtragem.html')
+    
 
+
+@app.route('/dados-aleatorios')
+def dados_aleatorios():
+    try:
+        dados_grafico = {
+            'data1': generate_random_data(5),
+            'data2': generate_random_data(5),
+            'data3': generate_random_data(5),
+        }
+        return jsonify(dados_grafico)
+    except Exception as e:
+        return jsonify({'error': str(e)})
+
+@app.route('/aeradores')
+def aeradores():
+    try:
+        dados_grafico = {
+            'data1': generate_random_data(5),
+            'data2': generate_random_data(5),
+            'data3': generate_random_data(5),
+        }
+        return render_template('aeradores.html', dados_grafico=dados_grafico)
+    except Exception as e:
+        flash(f"Erro ao obter dados para aeradores: {str(e)}", 'erro')
+        return render_template('aeradores.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+

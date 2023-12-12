@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeradores</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/base.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 400vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .botao-sobre {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2em;
+        }
+
+        .info-box,
+        .curiosidade-box,
+        .chart-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2em;
+        }
+
+        .info-box img,
+        .curiosidade-box img,
+        .chart-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 1em;
+        }
+
+        .info-box h2,
+        .curiosidade-box h2,
+        .chart-box h2 {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <header class="titulo-aeradores">
+
+        <a href="aeradores.html" class="botao-sobre">Voltar para os Gráficos</a>
+        <h1>AERADORES</h1>
+    </header>
+
+    <div class="options-box"></div>
+    <div class="container">
+        <div class="info-box">
+            <h2>O QUE SÃO AERADORES?</h2>
+            <p>Aeradores são equipamentos que, dependendo do local onde são empregados, podem assumir uma ou várias funções. Quando utilizados em tratamento de efluentes líquidos, possuem duas ações principais: fornecer oxigênio para o meio líquido e/ou promover a movimentação do meio líquido fazendo com que os sólidos presentes se mantenham em suspensão, este processo é chamado de aeração.</p>
+            <img src="../static/Aeradores1.png" alt="Aeradores1">
+        </div>
+
+        <div class="curiosidade-box">   
+            <h2>AERAÇÃO</h2>
+            <p>A aeração é uma etapa do tratamento de água cujo objetivo é torná-la adequada para consumo humano ou para uso em processos industriais. Também pode ser utilizada no tratamento de efluentes, seja para reuso ou para o descarte correto.Entre outras coisas, a aeração ajuda na oxidação e na precipitação do ferro e do manganês, compostos indesejáveis por vezes encontrados na água.</p>
+            <img src="../static/aeradores2.jpg" alt="Aeradores2">
+        </div>
+
+        <div class="chart-box">
+            <h2>TIPOS DE AERAÇÃO</h2>
+            <p>Os tipos de aeração dividem-se em dois tipos: aeradores mecânicos (alta e baixa rotação, flutuantes e fixos) e os difusores de aeração. A aeração mecânica opera na superfície do tanque ou lagoa, enquanto a aeração difusa de ar comprimido opera no fundo do tanque de flotação.</p>
+            <img src="../static/aeracao-tratamento-efluentes-03.jpg" alt="Aeradores3">
+        </div>
+
+        <div class="chart-box">
+            <h2>TIPOS DE AERADORES</h2>
+            <p>Os tipos de aeradores mais comuns são: Injetores tipo Venturi, Aerador de Superfície, Aerador de Pás, Aerador com Difusões e um dos mais recentes o Aerador Cachoeira</p>
+            <img src="../static/aeradorcachoeira_cropped.png" alt="Aerador de Cachoeira">
+        </div>
+    </div>
+</body>
+</html>
