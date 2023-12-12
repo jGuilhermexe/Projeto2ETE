@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request, session, f
 from pymysql import MySQLError
 from werkzeug.local import LocalStack as _ctx_stack
 
-app = Flask(__name__)
+app = Flask(_name_)
 app.secret_key = '1'
 
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
@@ -151,5 +151,5 @@ def aeradores():
         flash(f"Erro ao obter dados para aeradores: {str(e)}", 'erro')
         return render_template('aeradores.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if _name_ == '_main_':
+    app.run(debug=True

@@ -14,6 +14,7 @@
             background-color: #f4f4f4;
         }
 
+
         header {
             background-color: #133C63;
             color: white;
@@ -31,6 +32,8 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
+
+
         }
 
         .container {
@@ -38,6 +41,7 @@
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 2em;
+
         }
 
         .info-box,
@@ -50,6 +54,7 @@
             margin: 1em;
             width: 550px;
             text-align: center;
+
         }
 
         .info-box img,
@@ -58,12 +63,14 @@
             width: 60%;
             height: 60%;
             border-radius: 8px;
+
         }
+
 
         canvas{
             color: white;
         }
-
+    
         .info-box{
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -74,6 +81,7 @@
             max-height: 200px;
             width: 60%;
             height: 60%;
+
         }
 
     </style>
@@ -82,56 +90,44 @@
     <header class="titulo-filtragem">
         <h1>FILTRAGEM</h1>
         <a href="sobre-filtragem.html" class="botao-sobre">Sobre Filtragem</a>
-        <a href="dashboard.html">Ir para Dashboard</a>
+
     </header>
 
     <div class="container">
-        <div class="chart-box">
+         <!-- <div class="chart-box">
             <h2>ÍNDICES DE FILTRAGEM 1</h2>
-            <canvas id="chart1"></canvas>
+            <canvas id="chart4"></canvas>
+        </div>  -->
+
+        <div class="chart-box">
+            <h2> ÍNDICES DE FILTRAGEM 1</h2>
+            <canvas id="chart2"></canvas>
         </div>
 
         <div class="chart-box">
             <div class="info-box2">
                 <h2>ÍNDICES DE FILTRAGEM 2</h2>
-                <canvas id="chart2"></canvas>
+                <canvas id="chart3"></canvas>
+
             </div>
         </div>
 
         <div class="chart-box">
             <h2>ÍNDICES DE FILTRAGEM 3</h2>
-            <canvas id="chart3"></canvas>
+            <canvas id="chart1"></canvas>
         </div>
-    </div>
 
+
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function loadData() {
-            fetch('dados.json')
-                .then(response => response.json())
-                .then(data => {
-                    updateChartData(chart1, data.data1);
-                    updateChartData(chart2, data.data2);
-                    updateChartData(chart3, data.data3);
-                });
-        }
-
-        function generateRandomData(length) {
-            return Array.from({ length }, () => Math.floor(Math.random() * 100));
-        }
-
-        function updateChartData(chart, data) {
-            chart.data.datasets[0].data = data;
-            chart.update();
-        }
-
         var ctx1 = document.getElementById('chart1').getContext('2d');
         var chart1 = new Chart(ctx1, {
             type: 'pie',
             data: {
                 labels: ['Íons metálicos', 'Arsênio', 'Estanho', 'Selênio', 'Antimônio'],
                 datasets: [{
-                    data: generateRandomData(5),
+                    data: [20, 20, 20, 20, 20],
                     backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
                 }]
             }
@@ -146,7 +142,7 @@
                     label: 'Remoção de Íons Metálicos',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
-                    data: generateRandomData(5)
+                    data: [30, 10, 20, 50, 40]
                 }]
             }
         });
@@ -160,14 +156,52 @@
                     label: 'Níveis de Óxidos de Cobalto, Níquel, Manganês e Chumbo',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
-                    data: generateRandomData(5),
+                    data: [5, 15, 10, 15, 5],
                     fill: false
                 }]
             }
         });
+        var ctx4 = document.getElementById('chart4').getContext('2d');
+        var DATA_COUNT = 7;
+        var NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
 
-        window.onload = function () {
-            loadData();
+        var labels = Utils.months({count: 7});
+        var data = {
+        labels: labels,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: [10, 30, 50, 20, 25, 44, -10],
+            borderColor: Utils.CHART_COLORS.red,
+            backgroundColor: Utils.CHART_COLORS.red,
+            },
+            {
+            label: 'Dataset 2',
+            data: [100, 33, 22, 19, 11, 49, 30],
+            borderColor: Utils.CHART_COLORS.blue,
+            backgroundColor: Utils.CHART_COLORS.blue,
+            }
+        ]
+        };var DATA_COUNT = 7;
+        var NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+        var labels = Utils.months({count: 7});
+        var data = {
+        labels: labels,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: [10, 30, 50, 20, 25, 44, -10],
+            borderColor: Utils.CHART_COLORS.red,
+            backgroundColor: Utils.CHART_COLORS.red,
+            },
+            {
+            label: 'Dataset 2',
+            data: [100, 33, 22, 19, 11, 49, 30],
+            borderColor: Utils.CHART_COLORS.blue,
+            backgroundColor: Utils.CHART_COLORS.blue,
+            }
+        ]
         };
     </script>
 </body>
