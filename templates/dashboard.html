@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/base.css">
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>dashboard</h2>
+            <img src="../static/undraw_Filter_re_sa16.png" width="100%">
+        </div>
+
+        <div class="card">
+            <h2>dashboard</h2>
+            <img src="../static/undraw_Filter_re_sa16.png" width="100%">
+        </div>
+
+        <div class="card">
+            <h2>dashboard</h2>
+            <img src="../static/undraw_Filter_re_sa16.png" width="100%">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>Filtragem</h2>
+            <img src="../static/undraw_React_re_g3ui.png" width="100%">
+            <a href="filtragem.html">Ir para Filtragem</a>
+
+
+        </div>
+
+        <div class="card">
+            <h2>Aeradores</h2>
+            <img src="../static/undraw_React_re_g3ui.png" width="100%">
+            <a href="aeradores.html">Ir para Aeradores</a>
+        </div>
+
+        <div class="card">
+            <h2>Filtros de óleo</h2>
+            <img src="../static/undraw_React_re_g3ui.png" width="100%">
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['A', 'B', 'C'],
+                datasets: [{
+                    data: [30, 40, 30],
+                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                datasets: [{
+                    label: '2023',
+                    backgroundColor: '#36A2EB',
+                    borderColor: '#36A2EB',
+                    data: [10, 20, 30, 40, 50]
+                }]
+            }
+        });
+
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                datasets: [{
+                    label: 'Novembro',
+                    backgroundColor: '#36A2EB',
+                    borderColor: '#36A2EB',
+                    data: [5, 10, 15, 10, 5],
+                    fill: false
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

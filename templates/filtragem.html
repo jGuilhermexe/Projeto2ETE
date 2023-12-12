@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtragem</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/base.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: center;
+            align-items: left;
+            justify-content: space-between;
+        }
+
+        .botao-sobre {
+            display: left;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2em;
+        }
+
+        .info-box,
+        .curiosidade-box,
+        .chart-box {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em;
+            width: 550px;
+            text-align: center;
+        }
+
+        .info-box img,
+        .info-box2 img {
+            object-fit: cover;
+            width: 60%;
+            height: 60%;
+            border-radius: 8px;
+        }
+
+        canvas{
+            color: white;
+        }
+
+        .info-box{
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart1{
+            max-width: 200px;
+            max-height: 200px;
+            width: 60%;
+            height: 60%;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="titulo-filtragem">
+        <h1>FILTRAGEM</h1>
+        <a href="sobre-filtragem.html" class="botao-sobre">Sobre Filtragem</a>
+        <a href="dashboard.html">Ir para Dashboard</a>
+    </header>
+
+    <div class="container">
+        <div class="chart-box">
+            <h2>ÍNDICES DE FILTRAGEM 1</h2>
+            <canvas id="chart1"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <div class="info-box2">
+                <h2>ÍNDICES DE FILTRAGEM 2</h2>
+                <canvas id="chart2"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h2>ÍNDICES DE FILTRAGEM 3</h2>
+            <canvas id="chart3"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function loadData() {
+            fetch('dados.json')
+                .then(response => response.json())
+                .then(data => {
+                    updateChartData(chart1, data.data1);
+                    updateChartData(chart2, data.data2);
+                    updateChartData(chart3, data.data3);
+                });
+        }
+
+        function generateRandomData(length) {
+            return Array.from({ length }, () => Math.floor(Math.random() * 100));
+        }
+
+        function updateChartData(chart, data) {
+            chart.data.datasets[0].data = data;
+            chart.update();
+        }
+
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Íons metálicos', 'Arsênio', 'Estanho', 'Selênio', 'Antimônio'],
+                datasets: [{
+                    data: generateRandomData(5),
+                    backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                datasets: [{
+                    label: 'Remoção de Íons Metálicos',
+                    backgroundColor: '#133C63',
+                    borderColor: '##133C63',
+                    data: generateRandomData(5)
+                }]
+            }
+        });
+
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                datasets: [{
+                    label: 'Níveis de Óxidos de Cobalto, Níquel, Manganês e Chumbo',
+                    backgroundColor: '#133C63',
+                    borderColor: '#36A2EB',
+                    data: generateRandomData(5),
+                    fill: false
+                }]
+            }
+        });
+
+        window.onload = function () {
+            loadData();
+        };
+    </script>
+</body>
+</html>
