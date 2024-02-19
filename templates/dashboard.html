@@ -57,6 +57,17 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function exibirPopup() {
+            alert("Você não tem permissão para acessar esta página.");
+        }
+
+        
+        fetch('/dashboard')  // Substitua '/rota_restrita' pela rota que requer permissão
+            .then(response => {
+                if (!response.ok) {
+                    exibirPopup();
+                }
+            });
         function redirectPage(url) {
             window.location.href = url;
         }

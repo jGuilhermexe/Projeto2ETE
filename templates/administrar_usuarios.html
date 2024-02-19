@@ -1,0 +1,40 @@
+<!-- administrar_usuarios.html -->
+<h1>Administrar Usuários</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th>Novo Cargo</th>
+        <th>Tags</th>
+        <th>Nova Tag</th>
+        <th>Ações</th>
+    </tr>
+    {% for usuario in usuarios %}
+    <tr>
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.email }}</td>
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.cargo }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('atualizar_cargo', usuario_id=usuario.id) }}">
+                <select name="novo_cargo">
+                    <option value="normal">Normal</option>
+                    <option value="administrador">Administrador</option>
+                </select>
+                <button type="submit">Atualizar Cargo</button>
+            </form>
+        </td>
+        <td>{{ usuario.tags }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('adicionar_tag', usuario_id=usuario.id) }}">
+                <input type="text" name="nova_tag" placeholder="Nova Tag">
+                <button type="submit">Adicionar Tag</button>
+            </form>
+        </td>
+        <td></td>
+    </tr>
+    {% endfor %}
+</table>
+    
