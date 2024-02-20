@@ -7,27 +7,109 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        header {
+            background-color: #063c75;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        header .left {
+            display: flex;
+            align-items: center;
+        }
+
+        header .right a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            background-color: #444;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        header .right a:first-child {
+            margin-left: 0;
+        }
+
+        header .right a:hover {
+            background-color: #555;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .card {
+            width: calc(30% - 20px);
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h2 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Dashboard</h1>
-        <a href="{{ url_for('logout') }}">Logout</a>
+        <div class="left">
+            <h1>SISTEMA ETE</h1>
+        </div>
+        <div class="right">
+            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('administrar_usuarios') }}">Administração</a>
+        </div>
     </header>
 
     <div class="container">
-        <div class="card">
-            <h2>dashboard</h2>
+        <div class="card" onclick="redirectPage('/gradeamento-peneiracao')">
+            <h2>Gradeamento e Peneiração</h2>
             <img src="../static/undraw_Filter_re_sa16.png" width="100%">
         </div>
 
         <div class="card">
-            <h2>dashboard</h2>
+            <h2>Sedimentação</h2>
             <img src="../static/undraw_Filter_re_sa16.png" width="100%">
         </div>
 
         <div class="card">
-            <h2>dashboard</h2>
+            <h2>Armazenamento de Água</h2>
             <img src="../static/undraw_Filter_re_sa16.png" width="100%">
         </div>
     </div>
@@ -36,81 +118,24 @@
         <div class="card" onclick="redirectPage('/filtragem')">
             <h2>Filtragem</h2>
             <img src="../static/undraw_React_re_g3ui.png" width="100%">
-            <!--<a href="filtragem.html">Ir para Filtragem</a>-->
-
-
         </div>
 
         <div class="card" onclick="redirectPage('/aeradores')">
             <h2>Aeradores</h2>
             <img src="../static/undraw_React_re_g3ui.png" width="100%">
-            <!--<a href="aeradores.html">Ir para Aeradores</a>-->
         </div>
 
-        <div class="card">
+        <div class="card" onclick="redirectPage('/coleta_oleo')">
             <h2>Filtros de óleo</h2>
             <img src="../static/undraw_React_re_g3ui.png" width="100%">
         </div>
     </div>
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function exibirPopup() {
-            alert("Você não tem permissão para acessar esta página.");
-        }
-
-        
-        fetch('/dashboard')  // Substitua '/rota_restrita' pela rota que requer permissão
-            .then(response => {
-                if (!response.ok) {
-                    exibirPopup();
-                }
-            });
         function redirectPage(url) {
             window.location.href = url;
         }
-        var ctx1 = document.getElementById('chart1').getContext('2d');
-        var chart1 = new Chart(ctx1, {
-            type: 'pie',
-            data: {
-                labels: ['A', 'B', 'C'],
-                datasets: [{
-                    data: [30, 40, 30],
-                    backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
-                }]
-            }
-        });
-
-        var ctx2 = document.getElementById('chart2').getContext('2d');
-        var chart2 = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
-                datasets: [{
-                    label: '2023',
-                    backgroundColor: '#36A2EB',
-                    borderColor: '#36A2EB',
-                    data: [10, 20, 30, 40, 50]
-                }]
-            }
-        });
-
-        var ctx3 = document.getElementById('chart3').getContext('2d');
-        var chart3 = new Chart(ctx3, {
-            type: 'line',
-            data: {
-                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
-                datasets: [{
-                    label: 'Novembro',
-                    backgroundColor: '#36A2EB',
-                    borderColor: '#36A2EB',
-                    data: [5, 10, 15, 10, 5],
-                    fill: false
-                }]
-            }
-        });
     </script>
 </body>
 </html>

@@ -97,6 +97,7 @@ def tag_required(tags):
 def index():
     return render_template('index.html')
 
+
 @app.route('/testar-conexao')
 def testar_conexao():
     try:
@@ -219,6 +220,28 @@ def adicionar_tag(usuario_id):
 
     return redirect(url_for('administrar_usuarios'))
 
+@app.route('/remover_tag/<int:usuario_id>', methods=['POST'])
+def remover_tag(usuario_id):
+    if request.method == 'POST':
+        try:
+            tag_remover = request.form['tag_remover']
+            usuario = Usuario.query.get(usuario_id)
+
+            if usuario:
+                tag = Tag.query.filter_by(nome=tag_remover).first()
+                if tag:
+                    usuario.tags.remove(tag)
+                    db.session.commit()
+                    flash('Tag removida com sucesso!', 'success')
+                else:
+                    flash('Tag não encontrada!', 'error')
+            else:
+                flash('Usuário não encontrado!', 'error')
+        except Exception as e:
+            flash(f"Erro ao remover tag: {str(e)}", 'error')
+
+    return redirect(url_for('administrar_usuarios'))
+
 
 @app.route('/filtragem')
 @tag_required(['filtrador','adm'])
@@ -260,5 +283,40 @@ def aeradores():
         flash(f"Erro ao obter dados para aeradores: {str(e)}", 'erro')
         return render_template('aeradores.html')
 
+@app.route("/coleta_oleo")
+@tag_required(['adm','coletor'])
+def coleta_de_oleo_dados():
+    # Gerar dados aleatórios para os índices 1, 2 e 3
+    chart1_data = generate_random_data(10, 30)
+    chart2_data = generate_random_data(1, 9)
+    chart3_data = generate_random_data(5, 15)
+
+    # São passados como argumento os dados que foram gerados aleatoriamente para uso nos gráficos.
+    # Dados estes que podem ser facilmente modificados acima
+    return render_template("coleta_oleo.html", title="Coleta de Óleo", chart2_data=chart2_data, chart3_data=chart3_data, chart1_data=chart1_data)
+
+# Define endpoint da página de informação sobre coleta de óleo e sua função
+@app.route("/entenda-oleo")
+def oleo_info():
+    return render_template("entenda-oleo.html", title="Entenda Óleo")
+
+# Endpoint de dados sobre gradeamento e peneiração e sua função
+@app.route("/gradeamento-peneiracao")
+@tag_required(['adm','peneirador'])
+def gradeamento_dados():
+    # Gerar dados aleatórios para os índices 1, 2 e 3
+    chart1_data = generate_random_data(10, 30)
+    chart2_data = generate_random_data(1, 9)
+    chart3_data = generate_random_data(5, 15)
+
+    # São passados como argumento os dados que foram gerados aleatoriamente para uso nos gráficos.
+    # Dados estes que podem ser facilmente modificados acima.
+    return render_template("gradeamento-peneiracao.html", title="Gradeamento e Peneiração", chart2_data=chart2_data, chart3_data=chart3_data, chart1_data=chart1_data)
+
+# Endpoint de informação sobre gradeamento e peneiração e sua função
+
+@app.route("/entenda-gradeamento")
+def gradeamento_info():
+    return render_template("entenda-gradeamento.html", title="Entenda Gradeamento e Peneiração")
 if __name__ == '__main__':
     app.run(debug=True)

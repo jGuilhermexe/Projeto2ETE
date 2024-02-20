@@ -1,40 +1,163 @@
-<!-- administrar_usuarios.html -->
-<h1>Administrar Usuários</h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Email</th>
-        <th>Nome</th>
-        <th>Cargo</th>
-        <th>Novo Cargo</th>
-        <th>Tags</th>
-        <th>Nova Tag</th>
-        <th>Ações</th>
-    </tr>
-    {% for usuario in usuarios %}
-    <tr>
-        <td>{{ usuario.id }}</td>
-        <td>{{ usuario.email }}</td>
-        <td>{{ usuario.nome }}</td>
-        <td>{{ usuario.cargo }}</td>
-        <td>
-            <form method="POST" action="{{ url_for('atualizar_cargo', usuario_id=usuario.id) }}">
-                <select name="novo_cargo">
-                    <option value="normal">Normal</option>
-                    <option value="administrador">Administrador</option>
-                </select>
-                <button type="submit">Atualizar Cargo</button>
-            </form>
-        </td>
-        <td>{{ usuario.tags }}</td>
-        <td>
-            <form method="POST" action="{{ url_for('adicionar_tag', usuario_id=usuario.id) }}">
-                <input type="text" name="nova_tag" placeholder="Nova Tag">
-                <button type="submit">Adicionar Tag</button>
-            </form>
-        </td>
-        <td></td>
-    </tr>
-    {% endfor %}
-</table>
-    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #063c75;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #063c75;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+        }
+
+        select, input[type="text"] {
+            padding: 5px;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #063c75;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #063c75;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button onclick="window.location.href='dashboard.html'">Voltar para o Dashboard</button>
+        <h1>Administrar Usuários</h1>
+        <button>Administração</button>
+    </div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Novo Cargo</th>
+            <th>Tags</th>
+            <th>Nova Tag</th>
+        </tr>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.cargo }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('atualizar_cargo', usuario_id=usuario.id) }}">
+                    <select name="novo_cargo">
+                        <option value="normal">Cliente</option>
+                        <option value="administrador">Administrador</option>
+                    </select>
+                    <button type="submit">Atualizar Cargo</button>
+                </form>
+            </td>
+            <td>
+                {% for tag in usuario.tags %}
+                    {{ tag.nome }}
+                    {% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                <form method="POST" action="{{ url_for('adicionar_tag', usuario_id=usuario.id) }}">
+                    <input type="text" name="nova_tag" placeholder="Nova Tag">
+                    <button type="submit">Adicionar Tag</button>
+                </form>
+            </td>
+            <td>
+            </td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Nome</th>
+            <th>Cargo</th>
+            <th>Novo Cargo</th>
+            <th>Tags</th>
+        </tr>
+        {% for usuario in usuarios %}
+        <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.cargo }}</td>
+                <td>
+                    {% for tag in usuario.tags %}
+                        {{ tag.nome }}
+                        {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            <td>
+                <form method="POST" action="{{ url_for('remover_tag', usuario_id=usuario.id) }}">
+                    <select name="tag_remover">
+                        {% for tag in usuario.tags %}
+                        <option value="{{ tag.nome }}">{{ tag.nome }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Remover Tag</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>
