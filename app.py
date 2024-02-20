@@ -287,9 +287,9 @@ def aeradores():
 @tag_required(['adm','coletor'])
 def coleta_de_oleo_dados():
     # Gerar dados aleatórios para os índices 1, 2 e 3
-    chart1_data = generate_random_data(10, 30)
-    chart2_data = generate_random_data(1, 9)
-    chart3_data = generate_random_data(5, 15)
+    chart1_data = generate_random_data(5)
+    chart2_data = generate_random_data(5)
+    chart3_data = generate_random_data(5)
 
     # São passados como argumento os dados que foram gerados aleatoriamente para uso nos gráficos.
     # Dados estes que podem ser facilmente modificados acima
@@ -305,9 +305,9 @@ def oleo_info():
 @tag_required(['adm','peneirador'])
 def gradeamento_dados():
     # Gerar dados aleatórios para os índices 1, 2 e 3
-    chart1_data = generate_random_data(10, 30)
-    chart2_data = generate_random_data(1, 9)
-    chart3_data = generate_random_data(5, 15)
+    chart1_data = generate_random_data(5)
+    chart2_data = generate_random_data(5)
+    chart3_data = generate_random_data(5)
 
     # São passados como argumento os dados que foram gerados aleatoriamente para uso nos gráficos.
     # Dados estes que podem ser facilmente modificados acima.
