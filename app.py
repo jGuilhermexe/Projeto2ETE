@@ -112,6 +112,7 @@ def tag_required(tags):
 def index():
     return render_template('index.html')
 
+
 @app.route('/testar-conexao')
 def testar_conexao():
     try:

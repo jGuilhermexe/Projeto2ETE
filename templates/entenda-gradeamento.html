@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipos de Coleta</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #133C63;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    display: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.botao-sobre {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 2em;
+}
+
+.info-box,
+.curiosidade-box,
+.chart-box {
+    width: 600px;
+    background-color: #3498db;
+    color: white;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 8px;
+    text-align: center;
+    height: 400px;
+    overflow: hidden;
+		align-content: center;
+}
+
+.info-box img {
+    object-fit: contain;
+    width: 70%;
+    height: 70%;
+    border-radius: 8px;
+}
+
+.curiosidade-box img {
+    object-fit: contain;
+		align-content: center;
+    width: 100%;
+    height: 60%;
+    border-radius: 2px;
+}
+
+.chart-box img {
+    object-fit: contain;
+    width: 40%;
+    height: 10%;
+    border-radius: px;
+}
+
+    </style>
+</head>
+<body>
+    <header class="titulo-coleta_oleo">
+        <a href="{{ url_for('gradeamento_dados') }}" class="botao-sobre">Graficos e Estatísticas</a>
+        <h1>GRADEAMENTO E PENEIRAÇÃO</h1>
+    </header>
+
+    <div class="options-box"></div>
+    <div class="container">
+        <div class="info-box" style="height: fit-content;">
+            <h2>O QUE É?</h2>
+            <p>O processo de tratamento geralmente envolve várias etapas para remover contaminantes e impurezas. Duas das primeiras etapas comuns são o gradeamento e a peneiração, que são métodos mecânicos de remoção de sólidos grosseiros e materiais indesejados do efluente bruto. Vou explicar cada um deles: </p>
+        </div>
+
+        <div class="curiosidade-box" style="height: fit-content;">
+            <h2>GRADEAMENTO</h2>
+            O gradeamento é geralmente a primeira etapa de remoção de sólidos em uma estação de tratamento de efluentes.
+						Consiste em passar o efluente bruto através de grades ou barras paralelas colocadas em um ângulo inclinado.
+						O objetivo é reter sólidos grosseiros, como pedaços de madeira, plástico, papel, latas e outros detritos grandes que podem estar presentes no efluente.
+						Esses sólidos retidos são então removidos mecanicamente e descartados adequadamente.
+						O gradeamento é importante porque ajuda a proteger equipamentos e processos subsequentes de danos causados por objetos grandes e materiais indesejados.
+						<img src="../static/gradeamento.jpg" alt="gradeamento" style="margin-top: 10px;">
+        </div>
+
+        <div class="options-box">
+            <div class="curiosidade-box" style="height: fit-content;">
+                <h2>PENEIRAÇÃO</h2>
+								A peneiração é uma etapa semelhante ao gradeamento, mas envolve o uso de peneiras ou telas com aberturas menores do que as usadas no gradeamento.
+								Enquanto o gradeamento retém apenas os sólidos grosseiros, a peneiração é capaz de capturar sólidos de tamanho menor, como cabelos, fibras, areia, e outros materiais de tamanho intermediário.
+								A água passa através das aberturas da tela, enquanto os sólidos são retidos.
+								Esses sólidos retidos são então removidos e descartados da mesma forma que no gradeamento.
+								A peneiração é importante para proteger equipamentos mais sensíveis e processos subsequentes, garantindo que o efluente esteja relativamente limpo antes de avançar para as próximas etapas do tratamento.
+                <img src="../static/peneira.jpg" alt="peneira" style="margin-top: 10px;">
+            </div>
+        </div>
+        <div class="options-box">
+        <div class="curiosidade-box" style="height: fit-content;">
+					Ambos, gradeamento e peneiração, desempenham um papel crucial na remoção de sólidos grosseiros e materiais indesejados do efluente bruto, preparando-o para tratamentos posteriores mais intensivos, como a sedimentação, a filtração e a desinfecção. Essas etapas subsequentes visam remover contaminantes adicionais e tornar o efluente seguro para descarte ou reutilização, conforme os padrões ambientais e regulamentares.
+        </div>
+        </div>
+</body>
+</html>
+

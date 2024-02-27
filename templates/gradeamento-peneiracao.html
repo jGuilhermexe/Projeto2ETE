@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradeamento e Peneiração</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .botao-sobre {
+            display: left;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2em;
+        }
+
+        .info-box,
+        .curiosidade-box,
+        .chart-box {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em;
+            width: 550px;
+            text-align: center;
+        }
+
+        .info-box img,
+        .info-box2 img {
+            object-fit: cover;
+            width: 60%;
+            height: 60%;
+            border-radius: 8px;
+        }
+
+        canvas {
+            color: white;
+        }
+
+        .info-box {
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart1 {
+            max-width: 200px;
+            max-height: 200px;
+            width: 60%;
+            height: 60%;
+        }
+    </style>
+</head>
+<body>
+    <header class="titulo-coleta-oleo">
+        <h1>GRADEAMENTO E PENEIRAÇÃO</h1>
+        <a href="{{ url_for('gradeamento_info') }}" class="botao-sobre">Entenda mais</a>
+    </header>
+
+    <div class="container">
+
+        <div class="chart-box">
+            <div class="info-box2">
+                <h2>ÍNDICES DE SEPARAÇÃO 1</h2>
+                <canvas id="chart3"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h2> ÍNDICES DE SEPARAÇÃO 2</h2>
+            <canvas id="chart2"></canvas>
+        </div>
+
+
+
+        <div class="chart-box">
+            <h2>DIVISÃO DOS AGREGADOS</h2>
+            <canvas id="chart1"></canvas>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Tipo 1', 'Tipo 2', 'Tipo 3', 'Tipo 4', 'Tipo 5'],
+                datasets: [{
+                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
+                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
+                       a leitura não seja feita corretamente */
+                    data: JSON.parse("{{ chart1_data }}"),
+                    backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                datasets: [{
+                    backgroundColor: '#133C63',
+                    borderColor: '##133C63',
+                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
+                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
+                       a leitura não seja feita corretamente */
+                    data: JSON.parse("{{ chart2_data }}")
+                }]
+            },
+            // Este trecho desativa o label
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                datasets: [{
+                    backgroundColor: '#133C63',
+                    borderColor: '#36A2EB',
+                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
+                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
+                       a leitura não seja feita corretamente */
+                    data: JSON.parse("{{ chart3_data }}"),
+                    fill: false
+                }]
+            },
+            // Este trecho desativa o label
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

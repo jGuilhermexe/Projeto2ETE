@@ -157,7 +157,10 @@
             data: {
                 labels: ['Óleo Vegetal', 'Óleo Mineral', 'Óleo Sintético', 'Óleo de Cozinha Usado', 'Óleo Diesel'],
                 datasets: [{
-                    data: [20, 20, 20, 20, 20],
+                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
+                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
+                       a leitura não seja feita corretamente */
+                    data: JSON.parse("{{ chart1_data }}"),
                     backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
                 }]
             }
@@ -172,7 +175,10 @@
                     label: 'Volume de Óleo Coletado',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
-                    data: [25, 35, 10, 50, 60]
+                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
+                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
+                       a leitura não seja feita corretamente */
+                    data: JSON.parse("{{ chart2_data }}")
                 }]
             }
         });
@@ -186,7 +192,10 @@
                     label: 'Eficiência de Coleta ao Longo do Tempo',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
-                    data: [8, 12, 10, 15, 5],
+                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
+                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
+                       a leitura não seja feita corretamente */
+                    data: JSON.parse("{{ chart3_data }}"),
                     fill: false
                 }]
             }
