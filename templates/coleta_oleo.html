@@ -21,8 +21,8 @@
             padding: 1em;
             text-align: center;
             display: center;
-            align-items: center;
-            justify-content: center;
+            align-items: left;
+            justify-content: space-between;
         }
 
         .botao-sobre {
@@ -41,6 +41,7 @@
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 2em;
+
         }
 
         .info-box,
@@ -86,12 +87,13 @@
     </style>
 </head>
 <body>
-    <header class="titulo-aeradores">
-
+    <header class="titulo-filtragem">
+        <h1>COLETA DE ÓLEO</h1>
         <a href="tipos-de-coleta" class="botao-sobre">Sobre coleta de óleo</a>
         <a href="dashboard">Ir para Dashboard</a>
-        <h1>COLETA DE ÓLEO</h1>
+
     </header>
+
 
     <div class="container">
 
@@ -160,7 +162,7 @@
                     /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
                        gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
                        a leitura não seja feita corretamente */
-                    data: JSON.parse("{{ chart1_data }}"),
+                    data: [20, 20, 20, 20, 20],
                     backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
                 }]
             }
@@ -178,7 +180,7 @@
                     /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
                        gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
                        a leitura não seja feita corretamente */
-                    data: JSON.parse("{{ chart2_data }}")
+                    data: [20, 20, 20, 20, 20]
                 }]
             }
         });
@@ -195,7 +197,7 @@
                     /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
                        gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
                        a leitura não seja feita corretamente */
-                    data: JSON.parse("{{ chart3_data }}"),
+                    data: [20, 20, 20, 20, 20],
                     fill: false
                 }]
             }

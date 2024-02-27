@@ -241,6 +241,31 @@ def adicionar_tag(usuario_id):
 
     return redirect(url_for('administrar_usuarios'))
 
+@app.route('/remover_tag/<int:usuario_id>', methods=['POST'])
+def remover_tag(usuario_id):
+    if request.method == 'POST':
+        try:
+            tag_remover = request.form['tag_remover']
+            usuario = Usuario.query.get(usuario_id)
+
+            if usuario:
+                tag = Tag.query.filter_by(nome=tag_remover).first()
+                if tag:
+                    usuario.tags.remove(tag)
+                    db.session.commit()
+                    # flash('Tag removida com sucesso!', 'success')
+                else:
+                    # flash('Tag não encontrada!', 'error')
+                    print('Tag não encontrada!', 'error')
+            else:
+                # flash('Usuário não encontrado!', 'error')
+                print('Usuário não encontrado!', 'error')
+        except Exception as e:
+            # flash(f"Erro ao remover tag: {str(e)}", 'error')
+            print(f"Erro ao remover tag: {str(e)}", 'error')
+
+    return redirect(url_for('administrar_usuarios'))
+
 @app.route('/dados-aleatorios')
 def dados_aleatorios():
     try:
@@ -314,6 +339,21 @@ def coleta_oleo():
 @tag_required(['adm','coletor'])
 def tipos_de_coleta():
     return render_template('tipos-de-coleta.html')
+
+@app.route('/gradeamento-peneiracao')
+@tag_required(['adm','gradeador'])
+def gradeamento_peneiracao():
+    return render_template('gradeamento-peneiracao.html')
+
+@app.route('/entenda-gradeamento')
+@tag_required(['adm','gradeador'])
+def entenda_gradeamento():
+    return render_template('entenda-gradeamento.html')
+
+@app.route('/arm_agua')
+@tag_required(['adm','armazenador'])
+def arm_agua():
+    return render_template('arm_agua.html')
 
 if __name__ == '__main__':
     with app.app_context():

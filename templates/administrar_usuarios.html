@@ -77,7 +77,7 @@
 </head>
 <body>
     <div class="header">
-        <button onclick="window.location.href='dashboard.html'">Voltar para o Dashboard</button>
+        <button onclick="window.location.href='dashboard'">Voltar para o Dashboard</button>
         <h1>Administrar Usuários</h1>
         <button>Administração</button>
     </div>
@@ -107,7 +107,12 @@
                     <button type="submit">Atualizar Cargo</button>
                 </form>
             </td>
-            <td>{{ usuario.tags }}</td>
+            <td>
+                {% for tag in usuario.tags %}
+                {{ tag.nome }}
+                {% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </td>
             <td>
                 <form method="POST" action="{{ url_for('adicionar_tag', usuario_id=usuario.id) }}">
                     <input type="text" name="nova_tag" placeholder="Nova Tag">
@@ -127,7 +132,12 @@
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.nome }}</td>
                 <td>{{ usuario.cargo }}</td>
-                <td>{{ usuario.tags }}</td>
+                <td>
+                    {% for tag in usuario.tags %}
+                    {{ tag.nome }}
+                    {% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
             <td>
                 <form method="POST" action="{{ url_for('remover_tag', usuario_id=usuario.id) }}">
                     <select name="tag_remover">
