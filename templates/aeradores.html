@@ -88,8 +88,8 @@
 <body>
     <header class="titulo-aeradores">
 
-        <a href="sobre-aeradores.html" class="botao-sobre">Sobre Aeradores</a>
-        <a href="dashboard.html">Ir para Dashboard</a>
+        <a href="sobre-aeradores" class="botao-sobre">Sobre Aeradores</a>
+        <a href="dashboard">Ir para Dashboard</a>
         <h1>AERADORES</h1>
     </header>
 
@@ -118,24 +118,39 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        function loadData() {
-            fetch('dados.json')
+        function atualizarChart1() {
+            fetch('/dados-aleatorios')
                 .then(response => response.json())
                 .then(data => {
-                    updateChartData(chart1, data.data1);
-                    updateChartData(chart2, data.data2);
-                    updateChartData(chart3, data.data3);
-                });
+                    chart1.data.datasets[0].data = data.data1;
+                    chart1.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
         }
 
-        function generateRandomData(length) {
-            return Array.from({ length }, () => Math.floor(Math.random() * 100));
+        function atualizarChart2() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart2.data.datasets[0].data = data.data2;
+                    chart2.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
         }
 
-        function updateChartData(chart, data) {
-            chart.data.datasets[0].data = data;
-            chart.update();
+        function atualizarChart3() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart3.data.datasets[0].data = data.data3;
+                    chart3.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
         }
+
+        atualizarChart1();
+        atualizarChart2();
+        atualizarChart3();
 
         var ctx1 = document.getElementById('chart1').getContext('2d');
         var chart1 = new Chart(ctx1, {
@@ -143,7 +158,7 @@
             data: {
                 labels: ['Injetores tipo Venturi', 'Aerador de Superfície', 'Aerador de Pás', 'Aerador com Difusões','Aerador Cachoeira'],
                 datasets: [{
-                    data: generateRandomData(5),
+                    data: [20, 20, 20, 20, 20],
                     backgroundColor: ['#1680D9', '#2716D9', '#1642D9', '#16BED9', '#5B01DB']
                 }]
             }
@@ -158,7 +173,7 @@
                     label: 'Uso de aeradores',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
-                    data: generateRandomData(5)
+                    data: [20, 20, 20, 20, 20]
                 }]
             }
         });
@@ -172,7 +187,7 @@
                     label: 'Presença de oxigênio na água',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
-                    data: generateRandomData(5),
+                    data: [20, 20, 20, 20, 20],
                     fill: false
                 }]
             }

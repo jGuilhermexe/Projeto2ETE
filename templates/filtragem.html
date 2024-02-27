@@ -89,7 +89,8 @@
 <body>
     <header class="titulo-filtragem">
         <h1>FILTRAGEM</h1>
-        <a href="sobre-filtragem.html" class="botao-sobre">Sobre Filtragem</a>
+        <a href="sobre-filtragem" class="botao-sobre">Sobre Filtragem</a>
+        <a href="dashboard">Ir para Dashboard</a>
 
     </header>
 
@@ -121,6 +122,40 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function atualizarChart1() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart1.data.datasets[0].data = data.data1;
+                    chart1.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        function atualizarChart2() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart2.data.datasets[0].data = data.data2;
+                    chart2.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        function atualizarChart3() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart3.data.datasets[0].data = data.data3;
+                    chart3.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        atualizarChart1();
+        atualizarChart2();
+        atualizarChart3();
+            
         var ctx1 = document.getElementById('chart1').getContext('2d');
         var chart1 = new Chart(ctx1, {
             type: 'pie',

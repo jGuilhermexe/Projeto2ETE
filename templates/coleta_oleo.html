@@ -14,14 +14,15 @@
             background-color: #f4f4f4;
         }
 
+
         header {
             background-color: #133C63;
             color: white;
             padding: 1em;
             text-align: center;
-            display: flex;
+            display: center;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
         }
 
         .botao-sobre {
@@ -31,6 +32,8 @@
             color: white;
             text-decoration: none;
             border-radius: 5px;
+
+
         }
 
         .container {
@@ -50,6 +53,7 @@
             margin: 1em;
             width: 550px;
             text-align: center;
+
         }
 
         .info-box img,
@@ -58,29 +62,35 @@
             width: 60%;
             height: 60%;
             border-radius: 8px;
+
         }
 
-        canvas {
+
+        canvas{
             color: white;
         }
-
-        .info-box {
+    
+        .info-box{
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .chart1 {
+        .chart1{
             max-width: 200px;
             max-height: 200px;
             width: 60%;
             height: 60%;
+
         }
+
     </style>
 </head>
 <body>
-    <header class="titulo-coleta-oleo">
+    <header class="titulo-aeradores">
+
+        <a href="tipos-de-coleta" class="botao-sobre">Sobre coleta de óleo</a>
+        <a href="dashboard">Ir para Dashboard</a>
         <h1>COLETA DE ÓLEO</h1>
-        <a href="tipos-de-coleta.html" class="botao-sobre">Tipos de Coleta</a>
     </header>
 
     <div class="container">
@@ -107,6 +117,40 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function atualizarChart1() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart1.data.datasets[0].data = data.data1;
+                    chart1.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        function atualizarChart2() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart2.data.datasets[0].data = data.data2;
+                    chart2.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        function atualizarChart3() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart3.data.datasets[0].data = data.data3;
+                    chart3.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        atualizarChart1();
+        atualizarChart2();
+        atualizarChart3();
+        
         var ctx1 = document.getElementById('chart1').getContext('2d');
         var chart1 = new Chart(ctx1, {
             type: 'pie',

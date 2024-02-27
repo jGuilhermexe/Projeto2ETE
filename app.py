@@ -47,9 +47,24 @@ def criar_primeiro_usuario_administrador():
             db.session.commit()
 
 
+class NumerosAleatorios(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    numero = db.Column(db.Integer)
+
+def gerar_e_salvar_numeros_aleatorios():
+    NumerosAleatorios.query.delete()
+
+    for _ in range(15):
+        numero = random.randint(1, 30)
+        novo_numero = NumerosAleatorios(numero=numero)
+        db.session.add(novo_numero)
+
+    db.session.commit()
+
 
 criar_tabelas()
 criar_primeiro_usuario_administrador()
+#gerar_e_salvar_numeros_aleatorios()
 
 def generate_random_data(length):
     return [random.randint(0, 100) for _ in range(length)]
@@ -62,10 +77,10 @@ def admin_required(f):
             if usuario.cargo == 'administrador':
                 return f(*args, **kwargs)
             else:
-                flash('Acesso não autorizado.', 'erro')
+                # flash('Acesso não autorizado.', 'erro')
                 return redirect(url_for('index'))
         else:
-            flash('Você precisa fazer login primeiro.', 'erro')
+            # flash('Você precisa fazer login primeiro.', 'erro')
             return redirect(url_for('login'))
     return decorated_function
 
@@ -117,11 +132,12 @@ def pagina_cadastro():
             db.session.add(novo_usuario)
             db.session.commit()
 
-            flash('Cadastro bem-sucedido! Faça login para continuar.', 'sucesso')
+            # flash('Cadastro bem-sucedido! Faça login para continuar.', 'sucesso')
             return redirect(url_for('index'))
 
         except Exception as e:
-            flash(f"Erro ao cadastrar usuário: {str(e)}", 'erro')
+            # flash(f"Erro ao cadastrar usuário: {str(e)}", 'erro')
+            print(f"Erro ao cadastrar usuário: {str(e)}", 'erro')
 
     return render_template('pagina-de-cadastro.html')
 
@@ -137,15 +153,16 @@ def fazer_login():
             if usuario:
                 session['usuario_id'] = usuario.id
                 session['tags_usuario'] = [tag.nome for tag in usuario.tags]
-                flash('Login bem-sucedido!', 'sucesso')
+                # flash('Login bem-sucedido!', 'sucesso')
                 print('Redirecionando para o dashboard...')
                 return redirect(url_for('dashboard'))
             else:
-                flash('Credenciais inválidas. Tente novamente.', 'erro')
+                # flash('Credenciais inválidas. Tente novamente.', 'erro')
                 return redirect(url_for('index'))
 
         except Exception as e:
-            flash(f"Erro ao fazer login: {str(e)}", 'erro')
+            # flash(f"Erro ao fazer login: {str(e)}", 'erro')
+            print(f"Erro ao fazer login: {str(e)}", 'erro')
 
     return redirect(url_for('index'))
 
@@ -154,13 +171,13 @@ def dashboard():
     if 'usuario_id' in session:
         return render_template('dashboard.html')
     else:
-        flash('Você precisa fazer login primeiro.', 'erro')
+        # flash('Você precisa fazer login primeiro.', 'erro')
         return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
     session.pop('usuario_id', None)
-    flash('Logout bem-sucedido!', 'sucesso')
+    # flash('Logout bem-sucedido!', 'sucesso')
     return redirect(url_for('index'))
 
 def login_required(f):
@@ -187,11 +204,13 @@ def atualizar_cargo(usuario_id):
             if usuario:
                 usuario.cargo = novo_cargo
                 db.session.commit()
-                flash('Cargo atualizado com sucesso!', 'success')
+                # flash('Cargo atualizado com sucesso!', 'success')
             else:
-                flash('Usuário não encontrado!', 'error')
+                # flash('Usuário não encontrado!', 'error')
+                print(f"Usuário não encontrado", 'error')
         except Exception as e:
-            flash(f"Erro ao atualizar cargo: {str(e)}", 'error')
+            # flash(f"Erro ao atualizar cargo: {str(e)}", 'error')
+            print(f"Erro ao atualizar cargo: {str(e)}", 'error')
 
     return redirect(url_for('administrar_usuarios'))
 
@@ -211,14 +230,29 @@ def adicionar_tag(usuario_id):
 
                 usuario.tags.append(tag)
                 db.session.commit()
-                flash('Tag adicionada com sucesso!', 'success')
+                # flash('Tag adicionada com sucesso!', 'success')
             else:
-                flash('Usuário não encontrado!', 'error')
+                # flash('Usuário não encontrado!', 'error')
+                print(f"Usuário não encontrado!", 'erro')
         except Exception as e:
-            flash(f"Erro ao adicionar tag: {str(e)}", 'error')
+            # flash(f"Erro ao adicionar tag: {str(e)}", 'error')
+            print(f"Erro ao adicionar tag: {str(e)}", 'erro')
 
     return redirect(url_for('administrar_usuarios'))
 
+@app.route('/dados-aleatorios')
+def dados_aleatorios():
+    try:
+        numeros_aleatorios = NumerosAleatorios.query.all()
+        
+        data1 = [num.numero for num in numeros_aleatorios[:5]]
+        data2 = [num.numero for num in numeros_aleatorios[5:10]]
+        data3 = [num.numero for num in numeros_aleatorios[10:]]
+        
+        return jsonify({'data1': data1, 'data2': data2, 'data3': data3})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 
 @app.route('/filtragem')
 @tag_required(['filtrador','adm'])
@@ -231,20 +265,25 @@ def filtragem():
         }
         return render_template('filtragem.html', dados_grafico=dados_grafico)
     except Exception as e:
-        flash(f"Erro ao obter dados para filtragem: {str(e)}", 'erro')
+        # flash(f"Erro ao obter dados para filtragem: {str(e)}", 'erro')
         return render_template('filtragem.html')
     
-@app.route('/dados-aleatorios')
-def dados_aleatorios():
-    try:
-        dados_grafico = {
-            'data1': generate_random_data(5),
-            'data2': generate_random_data(5),
-            'data3': generate_random_data(5),
-        }
-        return jsonify(dados_grafico)
-    except Exception as e:
-        return jsonify({'error': str(e)})
+@app.route('/sobre-filtragem')
+@tag_required(['adm','filtrador'])
+def sobre_filtragem():
+    return render_template('sobre-filtragem.html')
+    
+# @app.route('/dados-aleatorios')
+# def dados_aleatorios():
+#     try:
+#         dados_grafico = {
+#             'data1': generate_random_data(5),
+#             'data2': generate_random_data(5),
+#             'data3': generate_random_data(5),
+#         }
+#         return jsonify(dados_grafico)
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 
 @app.route('/aeradores')
 @tag_required(['adm','aerador'])
@@ -257,8 +296,26 @@ def aeradores():
         }
         return render_template('aeradores.html', dados_grafico=dados_grafico)
     except Exception as e:
-        flash(f"Erro ao obter dados para aeradores: {str(e)}", 'erro')
+        # flash(f"Erro ao obter dados para aeradores: {str(e)}", 'erro')
         return render_template('aeradores.html')
+    
+@app.route('/sobre-aeradores')
+@tag_required(['adm','aerador'])
+def sobre_aeradores():
+    return render_template('sobre-aeradores.html')
+
+@app.route('/coleta_oleo')
+@tag_required(['adm','coletor'])
+def coleta_oleo():
+    return render_template('coleta_oleo.html')
+
+@app.route('/tipos-de-coleta')
+@tag_required(['adm','coletor'])
+def tipos_de_coleta():
+    return render_template('tipos-de-coleta.html')
 
 if __name__ == '__main__':
+    with app.app_context():
+        gerar_e_salvar_numeros_aleatorios()
     app.run(debug=True)
+    
