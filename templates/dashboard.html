@@ -84,6 +84,27 @@
             border-radius: 8px;
             margin-top: 10px;
         }
+
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .error-popup .close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -92,40 +113,45 @@
             <h1>SISTEMA ETE</h1>
         </div>
         <div class="right">
-            <a href="{{ url_for('logout') }}">Logout</a>
-            <a href="{{ url_for('administrar_usuarios') }}">Administração</a>
+            <a href="{{ url_for('app.logout') }}">Logout</a>
+            <a href="administrar_usuarios">Administração</a>
         </div>
     </header>
 
+    <div id="error-popup" class="error-popup">
+        <span id="error-message"></span>
+        <span class="close" onclick="closeErrorPopup()">&times;</span>
+    </div>
+
     <div class="container">
-        <div class="card" onclick="redirectPage('/gradeamento-peneiracao')">
+        <div class="card" data-url="/gradeamento-peneiracao">
             <h2>Gradeamento e Peneiração</h2>
             <img src="../static/undraw_Filter_re_sa16.png" width="100%">
         </div>
 
-        <div class="card">
+        <div class="card" data-url="/sedimentacao">
             <h2>Sedimentação</h2>
             <img src="../static/undraw_Filter_re_sa16.png" width="100%">
         </div>
 
-        <div class="card" onclick="redirectPage('/arm_agua')">
+        <div class="card" data-url="/arm_agua">
             <h2>Armazenamento de Água</h2>
             <img src="../static/undraw_Filter_re_sa16.png" width="100%">
         </div>
     </div>
 
     <div class="container">
-        <div class="card" onclick="redirectPage('/filtragem')">
+        <div class="card" data-url="/filtragem">
             <h2>Filtragem</h2>
             <img src="../static/undraw_React_re_g3ui.png" width="100%">
         </div>
 
-        <div class="card" onclick="redirectPage('/aeradores')">
+        <div class="card" data-url="/aeradores">
             <h2>Aeradores</h2>
             <img src="../static/undraw_React_re_g3ui.png" width="100%">
         </div>
 
-        <div class="card" onclick="redirectPage('/coleta_oleo')">
+        <div class="card" data-url="/coleta_oleo">
             <h2>Filtros de óleo</h2>
             <img src="../static/undraw_React_re_g3ui.png" width="100%">
         </div>
@@ -133,6 +159,62 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        function showErrorPopup(message) {
+            var errorPopup = document.getElementById('error-popup');
+            var errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorPopup.style.display = 'block';
+        }
+
+        function closeErrorPopup() {
+            var errorPopup = document.getElementById('error-popup');
+            errorPopup.style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var cards = document.querySelectorAll('.card');
+            cards.forEach(function(card) {
+                card.addEventListener('click', function() {
+                    var url = this.dataset.url;
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === XMLHttpRequest.DONE) {
+                            if (xhr.status === 403) {
+                                var responseData = JSON.parse(xhr.responseText);
+                                if (responseData && responseData.error) {
+                                    showErrorPopup(responseData.error);
+                                }
+                            } else {
+                                window.location.href = url;
+                            }
+                        }
+                    };
+                    xhr.open('GET', url, true);
+                    xhr.send();
+                });
+            });
+
+            var adminLink = document.querySelector('.right a[href="administrar_usuarios"]');
+            adminLink.addEventListener('click', function(event) {
+                event.preventDefault(); 
+                var url = this.getAttribute('href'); 
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 403) {
+                            var responseData = JSON.parse(xhr.responseText);
+                            if (responseData && responseData.error) {
+                                showErrorPopup(responseData.error);
+                            }
+                        } else {
+                            window.location.href = url;
+                        }
+                    }
+                };
+                xhr.open('GET', url, true);
+                xhr.send();
+            });
+        });
         function redirectPage(url) {
             window.location.href = url;
         }

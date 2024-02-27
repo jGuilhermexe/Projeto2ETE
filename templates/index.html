@@ -6,6 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>Login</title>
+    <style>
+        .error-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .error-popup .close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function showErrorPopup(message) {
+            var errorPopup = document.getElementById('error-popup');
+            var errorMessage = document.getElementById('error-message');
+            errorMessage.textContent = message;
+            errorPopup.style.display = 'block';
+        }
+
+        function closeErrorPopup() {
+            var errorPopup = document.getElementById('error-popup');
+            errorPopup.style.display = 'none';
+        }
+    </script>
 </head>
 <body>
     <div class="main-login">
@@ -22,10 +57,14 @@
                 </ul>
             {% endif %}
         {% endwith %}
+        <div id="error-popup" class="error-popup" style="display: none;">
+            <span id="error-message"></span>
+            <span class="close" onclick="closeErrorPopup()">&times;</span>
+        </div>
         <div class="right-login">
             <div class="card-login">
                 <h1>LOGIN</h1>
-                <form action="{{ url_for('fazer_login') }}" method="post">
+                <form action="{{ url_for('app.fazer_login') }}" method="post">
                     <div class="textfield">
                         <label for="email">Email:</label>
                         <input type="email" id="email" name="email" placeholder="Email" required>
@@ -36,10 +75,17 @@
                     </div>
                     <button type="submit" class="btn-login">Login</button>
                 </form>
-                <a href="{{ url_for('pagina_cadastro') }}" class="btn-register">Cadastre-se</a>
+                <a href="{{ url_for('app.pagina_cadastro') }}" class="btn-register">Cadastre-se</a>
                 
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.href.indexOf('login-failed') > -1) {
+                showErrorPopup('Credenciais inválidas. Tente novamente.');
+            }
+        });
+    </script>
 </body>
 </html>

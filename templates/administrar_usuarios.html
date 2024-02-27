@@ -99,7 +99,7 @@
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.cargo }}</td>
             <td>
-                <form method="POST" action="{{ url_for('atualizar_cargo', usuario_id=usuario.id) }}">
+                <form method="POST" action="{{ url_for('app.atualizar_cargo', usuario_id=usuario.id) }}">
                     <select name="novo_cargo">
                         <option value="normal">Cliente</option>
                         <option value="administrador">Administrador</option>
@@ -114,7 +114,7 @@
                 {% endfor %}
             </td>
             <td>
-                <form method="POST" action="{{ url_for('adicionar_tag', usuario_id=usuario.id) }}">
+                <form method="POST" action="{{ url_for('app.adicionar_tag', usuario_id=usuario.id) }}">
                     <input type="text" name="nova_tag" placeholder="Nova Tag">
                     <button type="submit">Adicionar Tag</button>
                 </form>
@@ -139,7 +139,7 @@
                     {% endfor %}
                 </td>
             <td>
-                <form method="POST" action="{{ url_for('remover_tag', usuario_id=usuario.id) }}">
+                <form method="POST" action="{{ url_for('app.remover_tag', usuario_id=usuario.id) }}">
                     <select name="tag_remover">
                         {% for tag in usuario.tags %}
                         <option value="{{ tag.nome }}">{{ tag.nome }}</option>
