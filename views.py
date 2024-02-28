@@ -203,12 +203,13 @@ def remover_tag(usuario_id):
 @app_blueprint.route('/dados-aleatorios')
 def dados_aleatorios():
     try:
+        gerar_e_salvar_numeros_aleatorios()
         numeros_aleatorios = NumerosAleatorios.query.all()
-        
+
         data1 = [num.numero for num in numeros_aleatorios[:5]]
         data2 = [num.numero for num in numeros_aleatorios[5:10]]
         data3 = [num.numero for num in numeros_aleatorios[10:]]
-        
+
         return jsonify({'data1': data1, 'data2': data2, 'data3': data3})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
