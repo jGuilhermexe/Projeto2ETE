@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aeradores</title>
+    <title>Filtragem</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
@@ -14,26 +14,45 @@
             background-color: #f4f4f4;
         }
 
-
         header {
             background-color: #133C63;
             color: white;
             padding: 1em;
             text-align: center;
-            display: center;
-            align-items: left;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
         }
 
+        .titulo-filtragem h1 {
+            margin: 0;
+        }
+
         .botao-sobre {
-            display: left;
             padding: 10px 20px;
             background-color: #3498db;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
 
+        .botao-sobre:hover {
+            background-color: #2980b9;
+        }
 
+        .botao-dashboard {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .botao-dashboard:hover {
+            background-color: #27ae60;
         }
 
         .container {
@@ -41,7 +60,6 @@
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 2em;
-
         }
 
         .info-box,
@@ -54,7 +72,6 @@
             margin: 1em;
             width: 550px;
             text-align: center;
-
         }
 
         .info-box img,
@@ -63,56 +80,52 @@
             width: 60%;
             height: 60%;
             border-radius: 8px;
-
         }
 
-
-        canvas{
+        canvas {
             color: white;
         }
-    
-        .info-box{
+
+        .info-box {
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .chart1{
+        .chart1 {
             max-width: 200px;
             max-height: 200px;
             width: 60%;
             height: 60%;
-
         }
-
     </style>
 </head>
 <body>
     <header class="titulo-filtragem">
         <h1>AERADORES</h1>
         <a href="sobre-aeradores" class="botao-sobre">Sobre Aeradores</a>
-        <a href="dashboard">Ir para Dashboard</a>
-
+        <a href="dashboard" class="botao-dashboard">Voltar para Dashboard</a>
     </header>
+
 
 
     <div class="container">
 
 
         <div class="chart-box">
-            <h2> CRESCIMENTO DO USO DE AERADORES</h2>
+            <h2>TAXA DA REDUÇÃO DO NIVEL DE ODORES</h2>
             <canvas id="chart2"></canvas>
         </div>
 
         <div class="chart-box">
             <div class="info-box2">
-                <h2>OXIGENAÇÃO DA ÁGUA</h2>
+                <h2>INDICE SEMANAL DE OXIGENAÇÃO DA ÁGUA DURANTE O PROCESSO DE AERAÇÃO</h2>
                 <canvas id="chart3"></canvas>
 
             </div>
         </div>
 
         <div class="chart-box">
-            <h2>GRÁFICO USO DE AERADORES</h2>
+            <h2>NIVEL DE EFICACIA DE CADA TIPO DE AERADOR</h2>
             <canvas id="chart1"></canvas>
         </div>
 
@@ -170,9 +183,9 @@
         var chart2 = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                labels: ['Entrada', 'Primário', 'Secundário', 'Avançado', 'Desinfecção'],
                 datasets: [{
-                    label: 'Uso de aeradores',
+                    label: 'Percepção de odores em diferentes pontos do processo de tratamento',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
                     data: [20, 20, 20, 20, 20]
@@ -186,7 +199,7 @@
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
                 datasets: [{
-                    label: 'Presença de oxigênio na água',
+                    label: 'Taxa de oxidação de matéria contaminante',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
                     data: [20, 20, 20, 20, 20],

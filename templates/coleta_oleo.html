@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coleta de Óleo</title>
+    <title>Filtragem</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
@@ -14,26 +14,45 @@
             background-color: #f4f4f4;
         }
 
-
         header {
             background-color: #133C63;
             color: white;
             padding: 1em;
             text-align: center;
-            display: center;
-            align-items: left;
+            display: flex;
+            align-items: center;
             justify-content: space-between;
         }
 
+        .titulo-filtragem h1 {
+            margin: 0;
+        }
+
         .botao-sobre {
-            display: left;
             padding: 10px 20px;
             background-color: #3498db;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
 
+        .botao-sobre:hover {
+            background-color: #2980b9;
+        }
 
+        .botao-dashboard {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .botao-dashboard:hover {
+            background-color: #27ae60;
         }
 
         .container {
@@ -41,7 +60,6 @@
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 2em;
-
         }
 
         .info-box,
@@ -54,7 +72,6 @@
             margin: 1em;
             width: 550px;
             text-align: center;
-
         }
 
         .info-box img,
@@ -63,36 +80,32 @@
             width: 60%;
             height: 60%;
             border-radius: 8px;
-
         }
 
-
-        canvas{
+        canvas {
             color: white;
         }
-    
-        .info-box{
+
+        .info-box {
             color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .chart1{
+        .chart1 {
             max-width: 200px;
             max-height: 200px;
             width: 60%;
             height: 60%;
-
         }
-
     </style>
 </head>
 <body>
     <header class="titulo-filtragem">
         <h1>COLETA DE ÓLEO</h1>
-        <a href="tipos-de-coleta" class="botao-sobre">Sobre coleta de óleo</a>
-        <a href="dashboard">Ir para Dashboard</a>
-
+        <a href="tipos-de-coleta" class="botao-sobre">Sobre Coleta de Óleo</a>
+        <a href="dashboard" class="botao-dashboard">Voltar para Dashboard</a>
     </header>
+
 
 
     <div class="container">
