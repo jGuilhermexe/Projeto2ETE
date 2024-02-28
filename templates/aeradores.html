@@ -112,20 +112,20 @@
 
 
         <div class="chart-box">
-            <h2> CRESCIMENTO DO USO DE AERADORES</h2>
+            <h2>TAXA DA REDUÇÃO DO NIVEL DE ODORES</h2>
             <canvas id="chart2"></canvas>
         </div>
 
         <div class="chart-box">
             <div class="info-box2">
-                <h2>OXIGENAÇÃO DA ÁGUA</h2>
+                <h2>INDICE SEMANAL DE OXIGENAÇÃO DA ÁGUA DURANTE O PROCESSO DE AERAÇÃO</h2>
                 <canvas id="chart3"></canvas>
 
             </div>
         </div>
 
         <div class="chart-box">
-            <h2>GRÁFICO USO DE AERADORES</h2>
+            <h2>NIVEL DE EFICACIA DE CADA TIPO DE AERADOR</h2>
             <canvas id="chart1"></canvas>
         </div>
 
@@ -183,9 +183,9 @@
         var chart2 = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                labels: ['Entrada', 'Primário', 'Secundário', 'Avançado', 'Desinfecção'],
                 datasets: [{
-                    label: 'Uso de aeradores',
+                    label: 'Percepção de odores em diferentes pontos do processo de tratamento',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
                     data: [20, 20, 20, 20, 20]
@@ -199,7 +199,7 @@
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
                 datasets: [{
-                    label: 'Presença de oxigênio na água',
+                    label: 'Taxa de oxidação de matéria contaminante',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
                     data: [20, 20, 20, 20, 20],

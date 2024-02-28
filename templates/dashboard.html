@@ -67,6 +67,12 @@
             margin-bottom: 20px;
             transition: box-shadow 0.3s ease;
             cursor: pointer;
+
+            /* Adicionando flexbox para centralizar o conteúdo */
+            display: flex;
+            flex-direction: column; /* Alinha os itens verticalmente */
+            justify-content: center; /* Centraliza verticalmente */
+            align-items: center; /* Centraliza horizontalmente */
         }
 
         .card:hover {
@@ -74,15 +80,17 @@
         }
 
         .card h2 {
-            margin-top: 0;
+            margin-top: 10px; /* Adicione um espaço entre o título e a imagem */
             font-size: 20px;
             color: #333;
         }
 
         .card img {
-            width: 100%;
+            width: 80%; /* Defina o tamanho da imagem conforme necessário */
+            max-width: 100%; /* Garante que a imagem não ultrapasse a largura da caixa */
+            height: auto; /* Mantém a proporção da imagem */
             border-radius: 8px;
-            margin-top: 10px;
+            margin-top: 10px; /* Adicione um espaço acima da imagem */
         }
 
         .error-popup {
@@ -125,35 +133,35 @@
 
     <div class="container">
         <div class="card" data-url="/gradeamento-peneiracao">
-            <h2>GRADEAMENTO E PENEIRAÇÃO</h2>
-            <img src="../static/undraw_Filter_re_sa16.png" width="100%">
+            <h2>Gradeamento e Peneiração</h2>
+            <img src="../static/peneirar.png" alt="Gradeamento e Peneiração">
         </div>
 
         <div class="card" data-url="/sedimentacao">
-            <h2>SEDIMENTAÇÃO</h2>
-            <img src="../static/undraw_Filter_re_sa16.png" width="100%">
+            <h2>Sedimentação</h2>
+            <img src="../static/potencial-de-sedimentacao.png" alt="Sedimentação">
         </div>
 
         <div class="card" data-url="/arm_agua">
-            <h2>ARMAZENAMENTO DE ÁGUA</h2>
-            <img src="../static/undraw_Filter_re_sa16.png" width="100%">
+            <h2>Armazenamento de Água</h2>
+            <img src="../static/armazenamento.png" alt="Armazenamento de Água">
         </div>
     </div>
 
     <div class="container">
         <div class="card" data-url="/filtragem">
-            <h2>FILTRAGEM</h2>
-            <img src="../static/undraw_React_re_g3ui.png" width="100%">
+            <h2>Filtragem</h2>
+            <img src="../static/filtro (1).png" width="100%">
         </div>
 
         <div class="card" data-url="/aeradores">
-            <h2>AERADORES</h2>
-            <img src="../static/undraw_React_re_g3ui.png" width="100%">
+            <h2>Aeradores</h2>
+            <img src="../static/aeracao.png" width="100%">
         </div>
 
         <div class="card" data-url="/coleta_oleo">
-            <h2>COLETA DE ÓLEO</h2>
-            <img src="../static/undraw_React_re_g3ui.png" width="100%">
+            <h2>Filtros de óleo</h2>
+            <img src="../static/combustivel.png" width="100%">
         </div>
     </div>
 
@@ -220,4 +228,4 @@
         }
     </script>
 </body>
-</html>
+</html
