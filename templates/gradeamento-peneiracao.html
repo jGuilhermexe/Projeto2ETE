@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filtragem</title>
+    <title>GRADEAMENTO E PENEIRAÇÃO</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
@@ -111,20 +111,20 @@
 
         <div class="chart-box">
             <div class="info-box2">
-                <h2>ÍNDICES DE SEPARAÇÃO 1</h2>
+                <h2>ÍNDICE SEMANAL DE EFICIÊNCIA DO PROCESSO DE GRADEAMENTO E PENEIRAÇÃO</h2>
                 <canvas id="chart3"></canvas>
             </div>
         </div>
 
         <div class="chart-box">
-            <h2> ÍNDICES DE SEPARAÇÃO 2</h2>
+            <h2> NÍVEIS DE CONTAMINANTES ENCONTRADOS APÓS PROCESSO DE GRADEAMENTO E PENEIRAÇÃO</h2>
             <canvas id="chart2"></canvas>
         </div>
 
 
 
         <div class="chart-box">
-            <h2>DIVISÃO DOS AGREGADOS</h2>
+            <h2>ANÁLISE MENSAL DA COMPOSIÇÃO DE RESÍDUOS APÓS PROCESSO DE GRADEAMENTO E PENEIRAÇÃO</h2>
             <canvas id="chart1"></canvas>
         </div>
     </div>
@@ -168,11 +168,8 @@
         var chart1 = new Chart(ctx1, {
             type: 'pie',
             data: {
-                labels: ['Tipo 1', 'Tipo 2', 'Tipo 3', 'Tipo 4', 'Tipo 5'],
+                labels: ['Plásticos', 'Sólidos', 'Inorgânicos', 'Papel e Papelão', 'Tecidos e Fibras'],
                 datasets: [{
-                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
-                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
-                       a leitura não seja feita corretamente */
                     data: [20, 20, 20, 20, 20],
                     backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
                 }]
@@ -183,17 +180,15 @@
         var chart2 = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                labels: ['Óleo', 'Graxa', 'Produtos Químicos', 'Sólidos Dissolvidos', 'Materiais Orgânicos Dissolvidos'],
                 datasets: [{
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
-                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
-                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
-                       a leitura não seja feita corretamente */
+
                     data: [20, 20, 20, 20, 20]
                 }]
             },
-            // Este trecho desativa o label
+
             options: {
                 plugins: {
                     legend: {
@@ -211,14 +206,11 @@
                 datasets: [{
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
-                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
-                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
-                       a leitura não seja feita corretamente */
                     data: [20, 20, 20, 20, 20],
                     fill: false
                 }]
             },
-            // Este trecho desativa o label
+
             options: {
                 plugins: {
                     legend: {
