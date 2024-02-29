@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEDIMENTAÇÃO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/base.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .titulo-filtragem h1 {
+            margin: 0;
+        }
+
+        .botao-sobre {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .botao-sobre:hover {
+            background-color: #2980b9;
+        }
+
+        .botao-dashboard {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .botao-dashboard:hover {
+            background-color: #27ae60;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2em;
+        }
+
+        .info-box,
+        .curiosidade-box,
+        .chart-box {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 1em;
+            margin: 1em;
+            width: 550px;
+            text-align: center;
+        }
+
+        .info-box img,
+        .info-box2 img {
+            object-fit: cover;
+            width: 60%;
+            height: 60%;
+            border-radius: 8px;
+        }
+
+        canvas {
+            color: white;
+        }
+
+        .info-box {
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart1 {
+            max-width: 200px;
+            max-height: 200px;
+            width: 60%;
+            height: 60%;
+        }
+    </style>
+</head>
+<body>
+    <header class="titulo-sedimentacao">
+        <h1>SEDIMENTAÇÃO</h1>
+        <a href="sobre-sedimentacao" class="botao-sobre">Sobre Sedimentação</a>
+        <a href="dashboard" class="botao-dashboard">Voltar para Dashboard</a>
+    </header>
+
+    <div class="container">
+        <div class="chart-box">
+            <h2>EFICIÊNCIA DA REMOÇÃO DE SST's NA SEDIMENTAÇÃO</h2>
+            <canvas id="chart2"></canvas>
+        </div>
+
+        <div class="chart-box">
+            <div class="info-box2">
+                <h2>NIVEIS DE MELHORIA DA QUALIDADE DA ÁGUA (MENSAL) </h2>
+                <canvas id="chart3"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-box">
+            <h2>ÍNDICE DE SÓLIDOS ENCONTRADOS APÓS SISTEMA DE DECANTAÇÃO</h2>
+            <canvas id="chart1"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function atualizarChart1() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart1.data.datasets[0].data = data.data1;
+                    chart1.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        function atualizarChart2() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart2.data.datasets[0].data = data.data2;
+                    chart2.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        function atualizarChart3() {
+            fetch('/dados-aleatorios')
+                .then(response => response.json())
+                .then(data => {
+                    chart3.data.datasets[0].data = data.data3;
+                    chart3.update();
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
+        }
+
+        atualizarChart1();
+        atualizarChart2();
+        atualizarChart3();
+            
+        var ctx1 = document.getElementById('chart1').getContext('2d');
+        var chart1 = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Sólidos Suspensos Totais (SST)', 'Sólidos Dissolvidos (SD)', 'Sólidos Sedimentáveis', 'Compostos Orgânicos Solúveis', 'Materia Orgânica em Decomposição'],
+                datasets: [{
+                    data: [20, 20, 20, 20, 20],
+                    backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
+                }]
+            }
+        });
+
+        var ctx2 = document.getElementById('chart2').getContext('2d');
+        var chart2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
+                datasets: [{
+                    label: 'Porcentagem(%) de água purificada',
+                    backgroundColor: '#133C63',
+                    borderColor: '##133C63',
+                    data: [30, 10, 20, 50, 40]
+                }]
+            }
+        });
+
+        var ctx3 = document.getElementById('chart3').getContext('2d');
+        var chart3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                datasets: [{
+                    label: 'Quantidade de água tratada(L) distribuida no meio ambiente',
+                    backgroundColor: '#133C63',
+                    borderColor: '#36A2EB',
+                    data: [5, 15, 10, 15, 5],
+                    fill: false
+                }]
+            }
+        });
+        var ctx4 = document.getElementById('chart4').getContext('2d');
+        var DATA_COUNT = 7;
+        var NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+        var labels = Utils.months({count: 7});
+        var data = {
+        labels: labels,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: [10, 30, 50, 20, 25, 44, -10],
+            borderColor: Utils.CHART_COLORS.red,
+            backgroundColor: Utils.CHART_COLORS.red,
+            },
+            {
+            label: 'Dataset 2',
+            data: [100, 33, 22, 19, 11, 49, 30],
+            borderColor: Utils.CHART_COLORS.blue,
+            backgroundColor: Utils.CHART_COLORS.blue,
+            }
+        ]
+        };var DATA_COUNT = 7;
+        var NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+        var labels = Utils.months({count: 7});
+        var data = {
+        labels: labels,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: [10, 30, 50, 20, 25, 44, -10],
+            borderColor: Utils.CHART_COLORS.red,
+            backgroundColor: Utils.CHART_COLORS.red,
+            },
+            {
+            label: 'Dataset 2',
+            data: [100, 33, 22, 19, 11, 49, 30],
+            borderColor: Utils.CHART_COLORS.blue,
+            backgroundColor: Utils.CHART_COLORS.blue,
+            }
+        ]
+        };
+    </script>
+</body>
+</html>

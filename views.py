@@ -282,3 +282,7 @@ def arm_agua():
 def sedimentacao():
     return render_template('sedimentacao.html')
 
+@app_blueprint.route('/sobre-sedimentacao')
+@tag_required(['adm','sedimentador'])
+def sobre_sedimentacao():
+    return render_template('sobre-sedimentacao.html')

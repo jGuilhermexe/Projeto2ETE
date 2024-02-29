@@ -27,6 +27,14 @@
             font-size: 20px;
             font-weight: bold;
         }
+
+        .black-outline {
+            color: white; /* Define a cor do texto como branco */
+            text-shadow: -1px -1px 0 #000,  
+                          1px -1px 0 #000,
+                         -1px  1px 0 #000,
+                          1px  1px 0 #000; /* Adiciona uma sombra preta em torno do texto */
+        }
     </style>
     <script>
         function showErrorPopup(message) {
@@ -45,7 +53,7 @@
 <body>
     <div class="main-login">
         <div class="left-login">
-            <h1>FAÇA LOGIN <br> ESTAÇÃO DE TRATAMENTO DE EFLUENTES </h1>
+            <h1><span class="black-outline">EFLUENTE CONTROL</span> <br> <span class="black-outline">ESTAÇÃO DE TRATAMENTO DE EFLUENTES</span></h1>
             <img src="{{ url_for('static', filename='world-water-day-animate.svg') }}" class="left-image" alt="Tratamento de Efluentes">
         </div>
         {% with messages = get_flashed_messages() %}
