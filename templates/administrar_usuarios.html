@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrar Usuários</title>
     <style>
@@ -14,12 +13,44 @@
         }
 
         .header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px;
-            background-color: #063c75;
+        }
+
+        .titulo-filtragem h1 {
+            margin: 0;
+        }
+
+        .botao-sobre {
+            padding: 10px 20px;
+            background-color: #3498db;
             color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .botao-sobre:hover {
+            background-color: #2980b9;
+        }
+
+        .botao-dashboard {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .botao-dashboard:hover {
+            background-color: #27ae60;
         }
 
         h1 {
@@ -73,14 +104,22 @@
         button:hover {
             background-color: #063c75;
         }
+
+        .alterar-tag {
+            background-color: #063c75;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="header">
-        <button onclick="window.location.href='dashboard'">Voltar para o Dashboard</button>
+    <header class="header">
+        <button onclick="window.location.href='dashboard'" class="botao-dashboard">Voltar para o Dashboard</button>
         <h1>Administrar Usuários</h1>
-        <button>Administração</button>
-    </div>
+    </header>
+
     <table>
         <tr>
             <th>ID</th>
@@ -125,6 +164,7 @@
         </tr>
         {% endfor %}
     </table>
+    <div class="alterar-tag">Alterar Tag</div>
     <table>
         {% for usuario in usuarios %}
         <tr>
@@ -151,6 +191,5 @@
         </tr>
         {% endfor %}
     </table>
-
 </body>
 </html>
