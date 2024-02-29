@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOBRE SEDIMENTAÇÃO</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="../static/base.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 400vh;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #133C63;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            display: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .botao-sobre {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 2em;
+        }
+
+        .info-box,
+        .curiosidade-box,
+        .chart-box {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2em;
+        }
+
+        .info-box img,
+        .curiosidade-box img,
+        .chart-box img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 1em;
+        }
+
+        .info-box h2,
+        .curiosidade-box h2,
+        .chart-box h2 {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <header class="titulo-sedimentacao">
+
+        <a href="sedimentacao" class="botao-sobre">Gráficos e Estatísticas</a>
+        <h1>SEDIMENTAÇÃO</h1>
+    </header>
+
+    <div class="options-box"></div>
+    <div class="container">
+        <div class="info-box">
+            <h2>O QUE É A SEDIMENTAÇÃO?</h2>
+            <p>Na sedimentação de um sistema de Estação de Tratamento de Esgoto (ETE), várias etapas e processos ocorrem para separar os sólidos suspensos e densos da água residual. A sedimentação é uma etapa fundamental no tratamento de águas residuais e envolve a remoção de partículas sólidas através da gravidade.</p>
+            <img src="../static/hidrosul_decantador03-1.jpg" alt="hidrosul_decantador03-1">
+        </div>
+
+        <div class="curiosidade-box">   
+            <h2>DECANTAÇÃO</h2>
+            <p>Decantação de Sólidos Suspensos: A água residual passa por tanques de sedimentação, onde as partículas sólidas presentes na água tendem a se depositar no fundo do tanque devido à gravidade. Este processo ajuda a remover sólidos em suspensão da água.</p>
+            <img src="../static/Decantacao.jpg" alt="Decantacao">
+        </div>
+
+        <div class="chart-box">
+            <h2>DEMAIS PROCESSOS DE DECANTAÇÃO, APÓS A SEDIMENTAÇÃO NUM ETE</h2>
+            <p>No processo de sedimentação em uma ETE, a água residual passa por tanques projetados para promover a clarificação. Durante esse processo, os sólidos suspensos presentes na água se separam por gravidade, sedimentando-se no fundo do tanque. Periodicamente, é necessária a remoção dos sedimentos acumulados para evitar a obstrução dos tanques e garantir a eficiência do tratamento. Esse processo de sedimentação resulta na melhoria da qualidade da água tratada, reduzindo a turbidez e removendo uma quantidade significativa de poluentes, tornando-a adequada para descarga ambiental ou reutilização em outros processos industriais ou agrícolas.</p>
+            <img src="../static/sedimentacaoedecantacao.png" alt="sedimentacaoedecantacao">
+        </div>
+    </div>
+</body>
+</html>

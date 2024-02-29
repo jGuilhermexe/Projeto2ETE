@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GRADEAMENTO E PENEIRAÇÃO</title>
+    <title>SEDIMENTAÇÃO</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
@@ -100,35 +100,30 @@
     </style>
 </head>
 <body>
-    <header class="titulo-filtragem">
-        <h1>GRADEAMENTO/PENEIRAÇÃO</h1>
-        <a href="entenda-gradeamento" class="botao-sobre">Sobre Gradeamento e Peneiração</a>
+    <header class="titulo-sedimentacao">
+        <h1>SEDIMENTAÇÃO</h1>
+        <a href="sobre-sedimentacao" class="botao-sobre">Sobre Sedimentação</a>
         <a href="dashboard" class="botao-dashboard">Voltar para Dashboard</a>
     </header>
 
-
     <div class="container">
+        <div class="chart-box">
+            <h2>EFICIÊNCIA DA REMOÇÃO DE SST's NA SEDIMENTAÇÃO</h2>
+            <canvas id="chart2"></canvas>
+        </div>
 
         <div class="chart-box">
             <div class="info-box2">
-                <h2>ÍNDICE SEMANAL DE EFICIÊNCIA DO PROCESSO DE GRADEAMENTO E PENEIRAÇÃO</h2>
+                <h2>NIVEIS DE MELHORIA DA QUALIDADE DA ÁGUA (MENSAL) </h2>
                 <canvas id="chart3"></canvas>
             </div>
         </div>
 
         <div class="chart-box">
-            <h2> NÍVEIS DE CONTAMINANTES ENCONTRADOS APÓS PROCESSO DE GRADEAMENTO E PENEIRAÇÃO</h2>
-            <canvas id="chart2"></canvas>
-        </div>
-
-
-
-        <div class="chart-box">
-            <h2>ANÁLISE MENSAL DA COMPOSIÇÃO DE RESÍDUOS APÓS PROCESSO DE GRADEAMENTO E PENEIRAÇÃO</h2>
+            <h2>ÍNDICE DE SÓLIDOS ENCONTRADOS APÓS SISTEMA DE DECANTAÇÃO</h2>
             <canvas id="chart1"></canvas>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         function atualizarChart1() {
@@ -164,11 +159,12 @@
         atualizarChart1();
         atualizarChart2();
         atualizarChart3();
+            
         var ctx1 = document.getElementById('chart1').getContext('2d');
         var chart1 = new Chart(ctx1, {
             type: 'pie',
             data: {
-                labels: ['Plásticos', 'Sólidos', 'Inorgânicos', 'Papel e Papelão', 'Tecidos e Fibras'],
+                labels: ['Sólidos Suspensos Totais (SST)', 'Sólidos Dissolvidos (SD)', 'Sólidos Sedimentáveis', 'Compostos Orgânicos Solúveis', 'Materia Orgânica em Decomposição'],
                 datasets: [{
                     data: [20, 20, 20, 20, 20],
                     backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
@@ -180,21 +176,13 @@
         var chart2 = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: ['Óleo', 'Graxa', 'Produtos Químicos', 'Sólidos Dissolvidos', 'Materiais Orgânicos Dissolvidos'],
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
                 datasets: [{
+                    label: 'Porcentagem(%) de água purificada',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
-
-                    data: [20, 20, 20, 20, 20]
+                    data: [30, 10, 20, 50, 40]
                 }]
-            },
-
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
             }
         });
 
@@ -204,21 +192,56 @@
             data: {
                 labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
                 datasets: [{
+                    label: 'Quantidade de água tratada(L) distribuida no meio ambiente',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
-                    data: [20, 20, 20, 20, 20],
+                    data: [5, 15, 10, 15, 5],
                     fill: false
                 }]
-            },
-
-            options: {
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
             }
         });
+        var ctx4 = document.getElementById('chart4').getContext('2d');
+        var DATA_COUNT = 7;
+        var NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+        var labels = Utils.months({count: 7});
+        var data = {
+        labels: labels,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: [10, 30, 50, 20, 25, 44, -10],
+            borderColor: Utils.CHART_COLORS.red,
+            backgroundColor: Utils.CHART_COLORS.red,
+            },
+            {
+            label: 'Dataset 2',
+            data: [100, 33, 22, 19, 11, 49, 30],
+            borderColor: Utils.CHART_COLORS.blue,
+            backgroundColor: Utils.CHART_COLORS.blue,
+            }
+        ]
+        };var DATA_COUNT = 7;
+        var NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
+
+        var labels = Utils.months({count: 7});
+        var data = {
+        labels: labels,
+        datasets: [
+            {
+            label: 'Dataset 1',
+            data: [10, 30, 50, 20, 25, 44, -10],
+            borderColor: Utils.CHART_COLORS.red,
+            backgroundColor: Utils.CHART_COLORS.red,
+            },
+            {
+            label: 'Dataset 2',
+            data: [100, 33, 22, 19, 11, 49, 30],
+            borderColor: Utils.CHART_COLORS.blue,
+            backgroundColor: Utils.CHART_COLORS.blue,
+            }
+        ]
+        };
     </script>
 </body>
 </html>

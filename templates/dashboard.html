@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>DASHBOARDS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
@@ -68,10 +68,10 @@
             transition: box-shadow 0.3s ease;
             cursor: pointer;
 
-            
             display: flex;
             flex-direction: column; 
-            justify-content: center; 
+            justify-content: center;
+
             align-items: center; 
         }
 
@@ -118,7 +118,7 @@
 <body>
     <header>
         <div class="left">
-            <h1>SISTEMA ETE</h1>
+            <h1>EFLUENTE CONTROL</h1>
         </div>
         <div class="right">
             <a href="{{ url_for('app.logout') }}">Logout</a>
@@ -143,7 +143,9 @@
         </div>
 
         <div class="card" data-url="/arm_agua">
-            <h2>ARMAZENAMENTO DE AGUA</h2>
+
+            <h2>ARMAZENAMENTO DE ÁGUA</h2>
+
             <img src="../static/armazenamento.png" alt="Armazenamento de Água">
         </div>
     </div>
@@ -160,7 +162,9 @@
         </div>
 
         <div class="card" data-url="/coleta_oleo">
-            <h2>FILTROS DE ÓLEO</h2>
+
+            <h2>COLETA DE ÓLEO</h2>
+
             <img src="../static/combustivel.png" width="100%">
         </div>
     </div>

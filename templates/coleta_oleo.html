@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filtragem</title>
+    <title>COLETA DE ÓLEO</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="../static/base.css">
     <style>
@@ -100,7 +100,7 @@
     </style>
 </head>
 <body>
-    <header class="titulo-filtragem">
+    <header class="titulo-Coleta de Óleo">
         <h1>COLETA DE ÓLEO</h1>
         <a href="tipos-de-coleta" class="botao-sobre">Sobre Coleta de Óleo</a>
         <a href="dashboard" class="botao-dashboard">Voltar para Dashboard</a>
@@ -112,20 +112,20 @@
 
         <div class="chart-box">
             <div class="info-box2">
-                <h2>ÍNDICES DA COLETA 1</h2>
+                <h2>VOLUME MENSAL DE ÓLEO COLETADO PELA ETE  </h2>
                 <canvas id="chart3"></canvas>
             </div>
         </div>
 
         <div class="chart-box">
-            <h2> ÍNDICES DA COLETA 2</h2>
+            <h2> EFICIÊNCIA DA COLETA DE ÓLEO MENSAL NA ETE</h2>
             <canvas id="chart2"></canvas>
         </div>
 
 
 
         <div class="chart-box">
-            <h2>TIPOS DE ÓLEO</h2>
+            <h2>TIPOS DE ÓLEO COLETADOS PELO SISTEMA DE ETE - ANUAL</h2>
             <canvas id="chart1"></canvas>
         </div>
     </div>
@@ -170,11 +170,8 @@
         var chart1 = new Chart(ctx1, {
             type: 'pie',
             data: {
-                labels: ['Óleo Vegetal', 'Óleo Mineral', 'Óleo Sintético', 'Óleo de Cozinha Usado', 'Óleo Diesel'],
+                labels: ['Óleo Vegetal', 'Óleo Mineral', 'Óleo Diesel', 'Óleo de Motores', 'Óleo Industrial'],
                 datasets: [{
-                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
-                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
-                       a leitura não seja feita corretamente */
                     data: [20, 20, 20, 20, 20],
                     backgroundColor: ['#B22222', '#36A2EB', '#FFCE56', '#228B22', '#FF8C00']
                 }]
@@ -187,12 +184,9 @@
             data: {
                 labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Maio'],
                 datasets: [{
-                    label: 'Volume de Óleo Coletado',
+                    label: 'Volume (L) de Óleo Coletado',
                     backgroundColor: '#133C63',
                     borderColor: '##133C63',
-                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
-                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
-                       a leitura não seja feita corretamente */
                     data: [20, 20, 20, 20, 20]
                 }]
             }
@@ -202,14 +196,11 @@
         var chart3 = new Chart(ctx3, {
             type: 'line',
             data: {
-                labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'],
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
                 datasets: [{
-                    label: 'Eficiência de Coleta ao Longo do Tempo',
+                    label: 'Volume (L) de óleo coletado ',
                     backgroundColor: '#133C63',
                     borderColor: '#36A2EB',
-                    /* Nesta linha foi necessário converter para JSON para que seja possível ler os 5 valores aleatórios
-                       gerados antes. Caso não seja convertido, o valor 'chart1_data' é lido como String, fazendo com que
-                       a leitura não seja feita corretamente */
                     data: [20, 20, 20, 20, 20],
                     fill: false
                 }]
